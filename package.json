@@ -23,7 +23,9 @@
     "Harshalkatakiya",
     "prettier",
     "prettier-config",
-    "prettier config"
+    "prettier-sharable-config",
+    "prettier config",
+    "prettier sharable config"
   ],
   "publishConfig": {
     "access": "public"
