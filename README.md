@@ -66,28 +66,6 @@ npm install -D -E prettier @harshalkatakiya/prettier-config@latest
 
 ---
 
-## Configuration Options
-
-This package comes with the following Prettier rules pre-configured:
-
-| Option                       | Value         | Description                                                 |
-| ---------------------------- | ------------- | ----------------------------------------------------------- |
-| `printWidth`                 | `80`          | The maximum line width.                                     |
-| `tabWidth`                   | `2`           | Number of spaces per indentation level.                     |
-| `useTabs`                    | `false`       | Use spaces for indentation.                                 |
-| `semi`                       | `true`        | Add semicolons at the end of statements.                    |
-| `singleQuote`                | `true`        | Use single quotes instead of double quotes.                 |
-| `quoteProps`                 | `'as-needed'` | Change quotes only when required.                           |
-| `jsxSingleQuote`             | `true`        | Use single quotes in JSX.                                   |
-| `trailingComma`              | `'none'`      | Avoid trailing commas.                                      |
-| `bracketSpacing`             | `true`        | Add spaces between brackets in object literals.             |
-| `bracketSameLine`            | `true`        | Keep the closing bracket of a JSX element on the same line. |
-| `arrowParens`                | `'always'`    | Always include parentheses in arrow functions.              |
-| `singleAttributePerLine`     | `false`       | Allow multiple attributes on a single line.                 |
-| `embeddedLanguageFormatting` | `'auto'`      | Format embedded languages automatically.                    |
-
----
-
 ## Scripts
 
 The following npm scripts are included for convenience:
@@ -107,6 +85,28 @@ The following npm scripts are included for convenience:
   ```
 
   This will validate whether the files follow the specified Prettier configuration.
+
+---
+
+## Configuration Options
+
+This package comes with the following Prettier rules pre-configured:
+
+| Option                       | Value         | Description                                                 |
+| ---------------------------- | ------------- | ----------------------------------------------------------- |
+| `printWidth`                 | `80`          | The maximum line width.                                     |
+| `tabWidth`                   | `2`           | Number of spaces per indentation level.                     |
+| `useTabs`                    | `false`       | Use spaces for indentation.                                 |
+| `semi`                       | `true`        | Add semicolons at the end of statements.                    |
+| `singleQuote`                | `true`        | Use single quotes instead of double quotes.                 |
+| `quoteProps`                 | `'as-needed'` | Change quotes only when required.                           |
+| `jsxSingleQuote`             | `true`        | Use single quotes in JSX.                                   |
+| `trailingComma`              | `'none'`      | Avoid trailing commas.                                      |
+| `bracketSpacing`             | `true`        | Add spaces between brackets in object literals.             |
+| `bracketSameLine`            | `true`        | Keep the closing bracket of a JSX element on the same line. |
+| `arrowParens`                | `'always'`    | Always include parentheses in arrow functions.              |
+| `singleAttributePerLine`     | `false`       | Allow multiple attributes on a single line.                 |
+| `embeddedLanguageFormatting` | `'auto'`      | Format embedded languages automatically.                    |
 
 ---
 
