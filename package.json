@@ -1,0 +1,44 @@
+{
+  "name": "@harshalkatakiya/prettier-config",
+  "version": "1.0.2",
+  "type": "module",
+  "description": "Harshal Katakiya's Prettier config",
+  "main": "index.js",
+  "prettier": "./index.js",
+  "license": "MIT",
+  "homepage": "https://www.npmjs.com/package/@harshalkatakiya/prettier-config",
+  "scripts": {
+    "prettier:check": "prettier -c .",
+    "prettier": "prettier -w -u .",
+    "release": "npm version patch && npm publish --access public --tag latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshalkatakiya/prettier-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Harshalkatakiya/prettier-config/issues"
+  },
+  "keywords": [
+    "Harshalkatakiya",
+    "prettier",
+    "prettier-config",
+    "prettier config"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": {
+    "name": "Harshal Katakiya",
+    "email": "katakiyaharshl001@gmail.com",
+    "url": "https://github.com/Harshalkatakiya"
+  },
+  "devDependencies": {
+    "prettier": "3.4.2"
+  }
+}
