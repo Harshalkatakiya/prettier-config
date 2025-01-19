@@ -4,7 +4,10 @@
   "type": "module",
   "description": "Harshal Katakiya's Prettier config",
   "main": "index.js",
-  "prettier": "./index.js",
+  "bin": {
+    "add": "./src/add.js"
+  },
+  "prettier": "./src/index.js",
   "license": "MIT",
   "homepage": "https://www.npmjs.com/package/@harshalkatakiya/prettier-config",
   "scripts": {
