@@ -15,7 +15,8 @@ const config = {
   bracketSameLine: true,
   arrowParens: 'always',
   singleAttributePerLine: false,
-  embeddedLanguageFormatting: 'auto'
+  embeddedLanguageFormatting: 'auto',
+  plugins: ['prettier-plugin-tailwindcss']
 };
 
 export default config;

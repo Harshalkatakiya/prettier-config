@@ -41,6 +41,7 @@
     "url": "https://github.com/Harshalkatakiya"
   },
   "devDependencies": {
-    "prettier": "3.4.2"
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.10"
   }
 }
