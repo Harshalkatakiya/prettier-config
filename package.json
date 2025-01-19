@@ -1,6 +1,6 @@
 {
   "name": "@harshalkatakiya/prettier-config",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "description": "Harshal Katakiya's Prettier config",
   "main": "index.js",
