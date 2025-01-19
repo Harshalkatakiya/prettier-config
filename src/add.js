@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from 'child_process';
-import { writeFileSync } from 'fs';
+import { existsSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import getPackageManager from './utils/getPackageManager.js';
 import installDependenciesCommand from './utils/installDependenciesCommand.js';
