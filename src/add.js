@@ -1,11 +1,24 @@
 #!/usr/bin/env node
 import { execSync } from 'child_process';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import inquirer from 'inquirer';
 import { resolve } from 'path';
 import getPackageManager from './utils/getPackageManager.js';
 import installDependenciesCommand from './utils/installDependenciesCommand.js';
 
-const prettierConfigContent = `import baseConfig from "@harshalkatakiya/prettier-config";
+const prettierConfigBaseContent = `import baseConfig from "@harshalkatakiya/prettier-config";
+
+/**
+ * @see https://prettier.io/docs/en/configuration.html
+ * @type {import("prettier").Config}
+ */
+const config = {
+  ...baseConfig
+};
+
+export default config;
+`;
+const prettierConfigTailwindContent = `import baseConfig from "@harshalkatakiya/prettier-config";
 
 /**
  * @see https://prettier.io/docs/en/configuration.html
@@ -26,12 +39,12 @@ const prettierScripts = {
   prettier: 'prettier -w -u .'
 };
 
-const installDependencies = async () => {
+const installDependencies = async (additionalDependencies = []) => {
   const packageManager = await getPackageManager();
   const installCommand = installDependenciesCommand(packageManager, [
     'prettier',
     '@harshalkatakiya/prettier-config',
-    'prettier-plugin-tailwindcss'
+    ...additionalDependencies
   ]);
   console.log('\n🔧 Installing dependencies...');
   try {
@@ -43,13 +56,19 @@ const installDependencies = async () => {
   }
 };
 
-const createPrettierConfigFile = () => {
+const createPrettierConfigFile = (isTailwindEnabled) => {
   const prettierConfigPath = resolve(process.cwd(), 'prettier.config.js');
   if (!existsSync(prettierConfigPath)) {
     console.log('\n📄 Creating prettier.config.js file...');
-    writeFileSync(prettierConfigPath, prettierConfigContent);
+    const content =
+      isTailwindEnabled ?
+        prettierConfigTailwindContent
+      : prettierConfigBaseContent;
+    writeFileSync(prettierConfigPath, content);
     console.log(
-      '✅ prettier.config.js file created with Tailwind CSS configuration!'
+      `✅ prettier.config.js file created${
+        isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
+      }`
     );
   } else {
     console.log(
@@ -95,9 +114,19 @@ const addScriptsToPackageJson = () => {
 };
 
 const main = async () => {
-  console.log('\n✨ Setting up Prettier with Tailwind CSS configuration...');
-  await installDependencies();
-  createPrettierConfigFile();
+  console.log('\n✨ Setting up Prettier configuration...');
+  const { isTailwindEnabled } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'isTailwindEnabled',
+      message: 'Do you want to set up Prettier for Tailwind CSS?',
+      default: true
+    }
+  ]);
+  await installDependencies(
+    isTailwindEnabled ? ['prettier-plugin-tailwindcss'] : []
+  );
+  createPrettierConfigFile(isTailwindEnabled);
   createPrettierIgnoreFile();
   addScriptsToPackageJson();
   console.log('\n🎉 Prettier setup complete! Happy coding!');
