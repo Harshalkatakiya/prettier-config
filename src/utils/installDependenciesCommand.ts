@@ -1,4 +1,4 @@
-const installDependenciesCommand = (packageManager, dependencies) => {
+const installDependenciesCommand = (packageManager: string, dependencies: Array<string>): string => {
   switch (packageManager) {
     case 'npm':
       return `npm install --save-dev ${dependencies.join(' ')}`;

@@ -3,17 +3,19 @@
   "version": "1.0.15",
   "type": "module",
   "description": "Harshal Katakiya's Prettier config",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./dist/index.js"
   },
   "bin": {
-    "add": "./src/add.js"
+    "add": "./dist/add.js"
   },
-  "prettier": "./src/index.js",
+  "prettier": "./dist/index.js",
   "license": "MIT",
   "homepage": "https://www.npmjs.com/package/@harshalkatakiya/prettier-config",
   "scripts": {
+    "build": "tsc",
     "prettier:check": "prettier -c .",
     "prettier": "prettier -w -u .",
     "release": "npm version patch && npm publish --access public --tag latest"
@@ -37,7 +39,7 @@
     "access": "public"
   },
   "files": [
-    "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
@@ -48,7 +50,8 @@
   },
   "devDependencies": {
     "prettier": "3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.10"
+    "prettier-plugin-tailwindcss": "^0.6.10",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "inquirer": "^12.3.2"

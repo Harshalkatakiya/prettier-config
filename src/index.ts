@@ -1,7 +1,6 @@
-/**
- * @type {import("prettier").Config}
- */
-const config = {
+import type { Config } from 'prettier';
+
+const config: Config = {
   experimentalTernaries: true,
   printWidth: 80,
   tabWidth: 2,

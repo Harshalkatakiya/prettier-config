@@ -33,13 +33,13 @@ const config = {
 
 export default config;
 `;
-const prettierIgnoreData = ['node_modules', 'dist', 'build'];
-const prettierScripts = {
+const prettierIgnoreData: string[] = ['node_modules', 'dist', 'build'];
+const prettierScripts: Record<string, string> = {
   'prettier:check': 'prettier -c .',
   prettier: 'prettier -w -u .'
 };
 
-const installDependencies = async (additionalDependencies = []) => {
+const installDependencies = async (additionalDependencies: string[] = []): Promise<void> => {
   const packageManager = await getPackageManager();
   const installCommand = installDependenciesCommand(packageManager, [
     'prettier',
@@ -51,23 +51,22 @@ const installDependencies = async (additionalDependencies = []) => {
     execSync(installCommand, { stdio: 'inherit' });
     console.log('✅ Dependencies installed successfully!');
   } catch (error) {
-    console.error('❌ Failed to install dependencies: ', error.message);
+    console.error('❌ Failed to install dependencies: ', (error as Error).message);
     process.exit(1);
   }
 };
 
-const createPrettierConfigFile = (isTailwindEnabled) => {
+const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
   const prettierConfigPath = resolve(process.cwd(), 'prettier.config.js');
   if (!existsSync(prettierConfigPath)) {
     console.log('\n📄 Creating prettier.config.js file...');
     const content =
       isTailwindEnabled ?
         prettierConfigTailwindContent
-      : prettierConfigBaseContent;
+        : prettierConfigBaseContent;
     writeFileSync(prettierConfigPath, content);
     console.log(
-      `✅ prettier.config.js file created${
-        isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
+      `✅ prettier.config.js file created${isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
       }`
     );
   } else {
@@ -77,7 +76,7 @@ const createPrettierConfigFile = (isTailwindEnabled) => {
   }
 };
 
-const createPrettierIgnoreFile = () => {
+const createPrettierIgnoreFile = (): void => {
   const prettierIgnorePath = resolve(process.cwd(), '.prettierignore');
   if (!existsSync(prettierIgnorePath)) {
     console.log('\n📄 Creating .prettierignore file...');
@@ -90,7 +89,7 @@ const createPrettierIgnoreFile = () => {
   }
 };
 
-const addScriptsToPackageJson = () => {
+const addScriptsToPackageJson = (): void => {
   const packageJsonPath = resolve(process.cwd(), 'package.json');
   if (!existsSync(packageJsonPath)) {
     console.error(
@@ -108,12 +107,12 @@ const addScriptsToPackageJson = () => {
     writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log('✅ Prettier scripts added to package.json!');
   } catch (error) {
-    console.error('❌ Failed to update package.json: ', error.message);
+    console.error('❌ Failed to update package.json: ', (error as Error).message);
     process.exit(1);
   }
 };
 
-const main = async () => {
+const main = async (): Promise<void> => {
   console.log('\n✨ Setting up Prettier configuration...');
   const { isTailwindEnabled } = await inquirer.prompt([
     {
@@ -132,7 +131,7 @@ const main = async () => {
   console.log('\n🎉 Prettier setup complete! Happy coding!');
 };
 
-main().catch((error) => {
-  console.error('❌ An unexpected error occurred: ', error.message);
+main().catch((error: unknown) => {
+  console.error('❌ An unexpected error occurred: ', (error as Error).message);
   process.exit(1);
 });

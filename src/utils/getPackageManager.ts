@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-const getPackageManager = async () => {
+const getPackageManager = async (): Promise<string> => {
   const packageManagers = [
     { name: 'bun', command: 'bun -v' },
     { name: 'pnpm', command: 'pnpm -v' },
