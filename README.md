@@ -1,74 +1,112 @@
 # @harshalkatakiya/prettier-config
 
-**A shareable and opinionated Prettier configuration by Harshal Katakiya.**
+**A shareable Prettier configuration by Harshal Katakiya, with built-in support for Tailwind CSS and a simple CLI setup command for your projects.**
 
 ---
 
-## Table of Contents
+## 📑 Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration Options](#configuration-options)
-- [Scripts](#scripts)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## Introduction
-
-`@harshalkatakiya/prettier-config` is a shareable Prettier configuration designed to simplify consistent code formatting across your projects. This configuration comes with opinionated rules that enforce clean, readable, and maintainable code while staying flexible for modern development workflows.
+- [📖 Introduction](#-introduction)
+- [🌟 Features](#-features)
+- [🚀 Usage](#-usage)
+  - [1️⃣ Use the CLI for Setup](#1️⃣-use-the-cli-for-setup)
+  - [2️⃣ Manual Setup (Optional)](#2️⃣-manual-setup-optional)
+- [📜 Scripts](#-scripts)
+- [⚙️ Configuration Options](#️-configuration-options)
+- [🤝 Contributing](#-contributing)
+  - [How to Contribute](#how-to-contribute)
+- [📄 License](#-license)
+- [👤 Author](#-author)
 
 ---
 
-## Features
+## 📖 Introduction
 
-- **Strict Formatting Rules:** Enforces clear and consistent code style across projects.
-- **Customizable:** You can extend or override the configuration as needed.
-- **Pre-configured Scripts:** Ready-to-use scripts for formatting and validating code.
-- **Modern Config:** Supports the latest Prettier features and syntax.
+`@harshalkatakiya/prettier-config` is a sharable Prettier configuration designed to simplify consistent code formatting across projects. It provides:
+
+- **Opinionated rules** for clean, readable, and maintainable code.
+- **Seamless Tailwind CSS support** using `prettier-plugin-tailwindcss`.
+- An easy-to-use **CLI command** for quick project setup.
+
+Whether you're starting a new project or adding Prettier to an existing one, this package makes your workflow faster and more efficient.
 
 ---
 
-## Installation
+## 🌟 Features
 
-To install this Prettier configuration package, run the following command:
+- ✅ **Prettier Configuration**: Pre-configured for JavaScript and TypeScript projects.
+- 🌀 **Tailwind CSS Support**: Comes with `prettier-plugin-tailwindcss` for better Tailwind class formatting.
+- ⚡ **Easy CLI Setup**: One command to integrate this configuration into your project.
+- 🔧 **Customizable**: Extend or override the default configuration as needed.
+- 🚀 **Ready-to-Use Scripts**: Format or validate your code instantly.
+- 🛠️ **Modern Config**: Compatible with the latest Prettier features and syntax.
+- 🛡️ **Strict Formatting Rules**: Enforces clear and consistent code style across your team.
+- 🖥️ **Pre-configured Scripts**: Adds formatting and validation scripts to your `package.json`.
+
+---
+
+## 🚀 Usage
+
+### 1️⃣ Use the CLI for Setup
+
+Run the following command to automatically configure your project:
 
 ```bash
-npm install -D -E prettier @harshalkatakiya/prettier-config@latest
+npx @harshalkatakiya/prettier-config add
+```
+
+This will:
+
+- Install required dev-dependencies in your project.
+- Create a `.prettierrc` file extending this configuration.
+- Add common ignores to `.prettierignore`.
+- Add Prettier scripts to your `package.json`.
+
+### 2️⃣ Manual Setup (Optional)
+
+Install the Packages using the following command:
+
+```bash
+npm i -D prettier @harshalkatakiya/prettier-config prettier-plugin-tailwindcss
+```
+
+Create a .prettierrc file in your project root and add the following json to your .prettierrc file:
+
+```json
+{
+  "extends": ["@harshalkatakiya/prettier-config"],
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindConfig": "./tailwind.config.js",
+  "tailwindStylesheet": "./src/app/globals.css"
+}
+```
+
+Create a .prettierignore file in your project root and add the following json to your .prettierignore file:
+
+```text
+node_modules
+dist
+build
+```
+
+Add Prettier scripts to your `package.json` in scripts section:
+
+```json
+{
+  "scripts": {
+    "prettier:check": "prettier -c .",
+    "prettier": "prettier -w -u ."
+  }
+}
 ```
 
 ---
 
-## Usage
+## 📜 Scripts
 
-1. Add the following feilds in your `package.json` to use this configuration:
+### Available Scripts
 
-   ```json
-   {
-     "scripts": {
-       "prettier:check": "prettier -c .",
-       "prettier": "prettier -w -u ."
-     },
-     "prettier": "@harshalkatakiya/prettier-config"
-   }
-   ```
-
-2. Alternatively, create a `.prettierrc` file in your project root with the following content:
-
-   ```json
-   "@harshalkatakiya/prettier-config"
-   ```
-
-3. You can now use Prettier with this configuration by running the provided scripts (see [Scripts](#scripts)).
-
----
-
-## Scripts
-
-The following npm scripts are included for convenience:
+**These scripts are automatically added to your package.json during CLI setup.**
 
 - **Format your code:**
 
@@ -84,11 +122,11 @@ The following npm scripts are included for convenience:
   npm run prettier:check
   ```
 
-  This will validate whether the files follow the specified Prettier configuration.
+  Validates if the files follow the configured Prettier rules.
 
 ---
 
-## Configuration Options
+## ⚙️ Configuration Options
 
 This package comes with the following Prettier rules pre-configured:
 
@@ -110,28 +148,28 @@ This package comes with the following Prettier rules pre-configured:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check out the [issues page](https://github.com/Harshalkatakiya/prettier-config/issues) for any open tickets or to report problems.
+Contributions are welcome! If you encounter any bugs or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/Harshalkatakiya/prettier-config/issues).
 
-If you'd like to contribute:
+### How to Contribute
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Commit your changes.
-4. Submit a pull request.
+1. Fork this repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes with a clear message.
+4. Open a pull request and describe your changes in detail.
 
 ---
 
-## License
+## 📄 License
 
 This package is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Author
+## 👤 Author
 
-**Harshal Katakiya**
+### Harshal Katakiya
 
 - GitHub: [@Harshalkatakiya](https://github.com/Harshalkatakiya)
 - Email: [katakiyaharshl001@gmail.com](mailto:katakiyaharshl001@gmail.com)
@@ -139,4 +177,4 @@ This package is licensed under the [MIT License](LICENSE).
 
 ---
 
-Enjoy clean and consistent code with `@harshalkatakiya/prettier-config`! 😊
+🌟 Enjoy clean and consistent code with `@harshalkatakiya/prettier-config`! 😊

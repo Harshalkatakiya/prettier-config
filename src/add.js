@@ -8,6 +8,7 @@ import installDependenciesCommand from './utils/installDependenciesCommand.js';
 const prettierrcContent = JSON.stringify(
   {
     extends: ['@harshalkatakiya/prettier-config'],
+    plugins: ['prettier-plugin-tailwindcss'],
     tailwindConfig: './tailwind.config.js',
     tailwindStylesheet: './src/app/globals.css'
   },
