@@ -47,7 +47,7 @@ Whether you're starting a new project or adding Prettier to an existing one, thi
 
 ## 🚀 Usage
 
-### 1️⃣ Use the CLI for Setup
+### 1️⃣ Use the CLI for automatic Setup
 
 Run the following command to automatically configure your project:
 
