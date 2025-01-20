@@ -5,16 +5,21 @@ import { resolve } from 'path';
 import getPackageManager from './utils/getPackageManager.js';
 import installDependenciesCommand from './utils/installDependenciesCommand.js';
 
-const prettierrcContent = JSON.stringify(
-  {
-    extends: ['@harshalkatakiya/prettier-config'],
-    plugins: ['prettier-plugin-tailwindcss'],
-    tailwindConfig: './tailwind.config.js',
-    tailwindStylesheet: './src/app/globals.css'
-  },
-  null,
-  2
-);
+const prettierConfigContent = `import baseConfig from "@harshalkatakiya/prettier-config";
+
+/**
+ * @see https://prettier.io/docs/en/configuration.html
+ * @type {import("prettier").Config}
+ */
+const config = {
+  ...baseConfig,
+  plugins: ["prettier-plugin-tailwindcss"],
+  tailwindConfig: "./tailwind.config.js",
+  tailwindStylesheet: "./src/app/globals.css"
+};
+
+export default config;
+`;
 const prettierIgnoreData = ['node_modules', 'dist', 'build'];
 const prettierScripts = {
   'prettier:check': 'prettier -c .',
@@ -38,14 +43,18 @@ const installDependencies = async () => {
   }
 };
 
-const createPrettierRcFile = () => {
-  const prettierRcPath = resolve(process.cwd(), '.prettierrc');
-  if (!existsSync(prettierRcPath)) {
-    console.log('\n📄 Creating .prettierrc file...');
-    writeFileSync(prettierRcPath, prettierrcContent);
-    console.log('✅ .prettierrc file created with Tailwind CSS configuration!');
+const createPrettierConfigFile = () => {
+  const prettierConfigPath = resolve(process.cwd(), 'prettier.config.js');
+  if (!existsSync(prettierConfigPath)) {
+    console.log('\n📄 Creating prettier.config.js file...');
+    writeFileSync(prettierConfigPath, prettierConfigContent);
+    console.log(
+      '✅ prettier.config.js file created with Tailwind CSS configuration!'
+    );
   } else {
-    console.log('\n⚠️  .prettierrc file already exists. Skipping creation.');
+    console.log(
+      '\n⚠️  prettier.config.js file already exists. Skipping creation.'
+    );
   }
 };
 
@@ -88,7 +97,7 @@ const addScriptsToPackageJson = () => {
 const main = async () => {
   console.log('\n✨ Setting up Prettier with Tailwind CSS configuration...');
   await installDependencies();
-  createPrettierRcFile();
+  createPrettierConfigFile();
   createPrettierIgnoreFile();
   addScriptsToPackageJson();
   console.log('\n🎉 Prettier setup complete! Happy coding!');
