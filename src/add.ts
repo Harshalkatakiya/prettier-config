@@ -28,7 +28,8 @@ const config = {
   ...baseConfig,
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindConfig: "./tailwind.config.js",
-  tailwindStylesheet: "./src/app/globals.css"
+  tailwindStylesheet: "./src/app/globals.css",
+  tailwindFunctions: ["cn"]
 };
 
 export default config;
@@ -69,6 +70,9 @@ const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
       `✅ prettier.config.js file created${isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
       }`
     );
+    if(isTailwindEnabled) {
+      console.log("ℹ️ Update path of main tailwind css file in `prettier.config.js`");
+    }
   } else {
     console.log(
       '\n⚠️  prettier.config.js file already exists. Skipping creation.'
