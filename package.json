@@ -18,6 +18,7 @@
     "build": "tsc",
     "prettier:check": "prettier -c .",
     "prettier": "prettier -w -u .",
+    "prepare": "bun run prettier && bun run build",
     "release": "npm version patch && npm publish --access public --tag latest"
   },
   "repository": {
