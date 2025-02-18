@@ -40,7 +40,9 @@ const prettierScripts: Record<string, string> = {
   prettier: 'prettier -w -u .'
 };
 
-const installDependencies = async (additionalDependencies: string[] = []): Promise<void> => {
+const installDependencies = async (
+  additionalDependencies: string[] = []
+): Promise<void> => {
   const packageManager = await getPackageManager();
   const installCommand = installDependenciesCommand(packageManager, [
     'prettier',
@@ -52,7 +54,10 @@ const installDependencies = async (additionalDependencies: string[] = []): Promi
     execSync(installCommand, { stdio: 'inherit' });
     console.log('✅ Dependencies installed successfully!');
   } catch (error) {
-    console.error('❌ Failed to install dependencies: ', (error as Error).message);
+    console.error(
+      '❌ Failed to install dependencies: ',
+      (error as Error).message
+    );
     process.exit(1);
   }
 };
@@ -64,14 +69,17 @@ const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
     const content =
       isTailwindEnabled ?
         prettierConfigTailwindContent
-        : prettierConfigBaseContent;
+      : prettierConfigBaseContent;
     writeFileSync(prettierConfigPath, content);
     console.log(
-      `✅ prettier.config.js file created${isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
+      `✅ prettier.config.js file created${
+        isTailwindEnabled ? ' with Tailwind CSS configuration!' : '!'
       }`
     );
-    if(isTailwindEnabled) {
-      console.log("ℹ️ Update path of main tailwind css file in `prettier.config.js`");
+    if (isTailwindEnabled) {
+      console.log(
+        'ℹ️ Update path of main tailwind css file in `prettier.config.js`'
+      );
     }
   } else {
     console.log(
@@ -111,7 +119,10 @@ const addScriptsToPackageJson = (): void => {
     writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log('✅ Prettier scripts added to package.json!');
   } catch (error) {
-    console.error('❌ Failed to update package.json: ', (error as Error).message);
+    console.error(
+      '❌ Failed to update package.json: ',
+      (error as Error).message
+    );
     process.exit(1);
   }
 };
