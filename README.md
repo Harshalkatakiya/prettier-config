@@ -9,7 +9,7 @@
 - [📖 Introduction](#-introduction)
 - [🌟 Features](#-features)
 - [🚀 Usage](#-usage)
-  - [1️⃣ Use the CLI for Setup](#1️⃣-use-the-cli-for-setup)
+  - [1️⃣ Use the CLI for Setup](#1️⃣-use-the-cli-for-automatic-setup)
   - [2️⃣ Manual Setup (Optional)](#2️⃣-manual-setup-optional)
 - [📜 Scripts](#-scripts)
 - [⚙️ Configuration Options](#️-configuration-options)
@@ -173,7 +173,7 @@ This package is licensed under the [MIT License](LICENSE).
 
 - GitHub: [@Harshalkatakiya](https://github.com/Harshalkatakiya)
 - Email: [katakiyaharshl001@gmail.com](mailto:katakiyaharshl001@gmail.com)
-- NPM: [@harshalkatakiya](https://www.npmjs.com/package/@harshalkatakiya)
+- NPM: [@harshalkatakiya](https://www.npmjs.com/~harshalkatakiya)
 
 ---
 

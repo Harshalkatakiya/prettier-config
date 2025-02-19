@@ -9,18 +9,38 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "add": "./dist/add.js"
+    "add": "dist/add.js"
   },
   "prettier": "./dist/index.js",
-  "license": "MIT",
-  "homepage": "https://www.npmjs.com/package/@harshalkatakiya/prettier-config",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint . --fix",
     "prettier:check": "prettier -c .",
     "prettier": "prettier -w -u .",
-    "prepare": "bun run prettier && bun run build",
+    "prepare": "husky",
     "release": "npm version patch && npm publish --access public --tag latest"
   },
+  "dependencies": {
+    "inquirer": "^12.4.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^22.13.4",
+    "chalk": "^5.4.1",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.15.0",
+    "prettier": "3.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier -w -u ."
+  },
+  "license": "MIT",
+  "homepage": "https://www.npmjs.com/package/@harshalkatakiya/prettier-config",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Harshalkatakiya/prettier-config.git"
@@ -28,14 +48,6 @@
   "bugs": {
     "url": "https://github.com/Harshalkatakiya/prettier-config/issues"
   },
-  "keywords": [
-    "Harshalkatakiya",
-    "prettier",
-    "prettier-config",
-    "prettier-sharable-config",
-    "prettier config",
-    "prettier sharable config"
-  ],
   "publishConfig": {
     "access": "public"
   },
@@ -49,12 +61,23 @@
     "email": "katakiyaharshl001@gmail.com",
     "url": "https://github.com/Harshalkatakiya"
   },
-  "devDependencies": {
-    "prettier": "3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.10",
-    "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "inquirer": "^12.3.2"
-  }
+  "keywords": [
+    "Prettier Config",
+    "Shareable Prettier Config",
+    "Prettier Tailwind CSS",
+    "Prettier Configuration for JavaScript",
+    "Prettier Configuration for TypeScript",
+    "Tailwind CSS Prettier Plugin",
+    "Prettier CLI Setup",
+    "Prettier Plugin TailwindCSS",
+    "Prettier npm Package",
+    "Prettier Config for React",
+    "Best Prettier Config",
+    "TailwindCSS Formatting with Prettier",
+    "How to Setup Prettier Config",
+    "Prettier Auto Formatting",
+    "Prettier Custom Configuration",
+    "Best Prettier Config for JavaScript",
+    "Best Prettier Config for TypeScript"
+  ]
 }

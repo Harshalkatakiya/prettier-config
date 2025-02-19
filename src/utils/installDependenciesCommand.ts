@@ -1,6 +1,6 @@
 const installDependenciesCommand = (
   packageManager: string,
-  dependencies: Array<string>
+  dependencies: string[]
 ): string => {
   switch (packageManager) {
     case 'npm':
