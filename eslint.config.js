@@ -25,7 +25,12 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: tsParser,
-      globals: { ...globals.browser, ...globals.node },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        process: 'readonly',
+        console: 'readonly'
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
