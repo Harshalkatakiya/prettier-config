@@ -60,6 +60,13 @@ const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
       ];
     writeFileSync(configFilePath, configContent, 'utf-8');
     console.log(`Created ${configFilePath}`);
+    if (isTailwindEnabled) {
+      console.log(
+        chalk.yellow(
+          `📢 Update ${detectTailwindVersion(projectPath) === 3 ? 'TailwindCss Config FIle Path' : 'TailwindCSS main CSS File Path'} in prettier.config.${langKey}.`
+        )
+      );
+    }
   } else {
     console.log(`${configFilePath} already exists. Skipping creation.`);
   }
