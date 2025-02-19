@@ -4,9 +4,7 @@ import { execSync } from 'child_process';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import inquirer from 'inquirer';
 import path, { resolve } from 'path';
-import detectTailwindVersion, {
-  tailwindConfigFileName
-} from './utils/detectTailwindVersion.js';
+import detectTailwindVersion from './utils/detectTailwindVersion.js';
 import getPackageManager from './utils/getPackageManager.js';
 import installDependenciesCommand from './utils/installDependenciesCommand.js';
 import isTypeScriptProject from './utils/isTypescriptProject.js';
@@ -49,20 +47,17 @@ const installDependencies = async (
 };
 
 const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
-  const configFilePath = path.join(
-    projectPath,
-    tailwindConfigFileName(projectPath)
-  );
-  const isTS = isTypeScriptProject(projectPath);
-  const langKey = isTS ? 'ts' : 'js';
-  const tailwindVersionKey =
-    isTailwindEnabled ?
-      detectTailwindVersion(projectPath) === 3 ?
-        'v3'
-      : 'v4'
-    : 'base';
-  const configContent = prettierConfigContents[langKey][tailwindVersionKey];
+  const langKey = isTypeScriptProject(projectPath) ? 'ts' : 'js';
+  const configFilePath = path.join(projectPath, `prettier.config.${langKey}`);
   if (!existsSync(configFilePath)) {
+    const configContent =
+      prettierConfigContents[langKey][
+        isTailwindEnabled ?
+          detectTailwindVersion(projectPath) === 3 ?
+            'v3'
+          : 'v4'
+        : 'base'
+      ];
     writeFileSync(configFilePath, configContent, 'utf-8');
     console.log(`Created ${configFilePath}`);
   } else {
