@@ -62,12 +62,13 @@ const createPrettierConfigFile = async (
   const tailwindCssVersion = detectTailwindVersion(projectPath);
   const configContent =
     prettierConfigContents[langKey][
-    isTailwindEnabled ? (tailwindCssVersion === 3 ? 'v3' : 'v4') : 'base'
+    isTailwindEnabled
+      ? tailwindCssVersion === 3
+        ? 'v3'
+        : 'v4'
+      : 'base'
     ];
-  const existingConfig = existsSync(configFilePath)
-    ? readFileSync(configFilePath, 'utf-8')
-    : '';
-  if (existingConfig !== configContent) {
+  if (existsSync(configFilePath)) {
     const { replace } = await inquirer.prompt([
       {
         type: 'confirm',
@@ -79,7 +80,12 @@ const createPrettierConfigFile = async (
     if (replace) {
       writeFileSync(configFilePath, configContent, 'utf-8');
       console.log(chalk.green(`Replaced ${configFilePath}`));
+    } else {
+      console.log(chalk.yellow(`Skipped replacing ${configFilePath}`));
     }
+  } else {
+    writeFileSync(configFilePath, configContent, 'utf-8');
+    console.log(chalk.green(`Created ${configFilePath}`));
   }
   return { tailwindCssVersion, langKey };
 };
