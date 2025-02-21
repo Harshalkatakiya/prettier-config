@@ -1,6 +1,11 @@
-# @harshalkatakiya/prettier-config
+# 🎨 @harshalkatakiya/prettier-config
 
 **A shareable Prettier configuration by Harshal Katakiya, with built-in support for Tailwind CSS and a simple CLI setup command to quickly integrate Prettier into your projects.**
+
+![Prettier](https://img.shields.io/badge/Prettier-2F1A3E?style=for-the-badge&logo=prettier&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)  
+![NPM](https://img.shields.io/npm/v/@harshalkatakiya/prettier-config?color=red&logo=npm&style=for-the-badge)
+![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
 ---
 
@@ -8,13 +13,12 @@
 
 - [📖 Introduction](#-introduction)
 - [🌟 Features](#-features)
-- [🚀 Usage](#-usage)
-  - [1️⃣ Automatic CLI Setup](#1️⃣-automatic-cli-setup)
-  - [2️⃣ Manual Setup (Optional)](#2️⃣-manual-setup-optional)
+- [🚀 Installation & Usage](#-installation--usage)
+  - [⚡ Automatic CLI Setup](#-automatic-cli-setup)
+  - [🔧 Manual Setup](#-manual-setup)
 - [📜 Scripts](#-scripts)
 - [⚙️ Configuration Options](#️-configuration-options)
 - [🤝 Contributing](#-contributing)
-  - [How to Contribute](#how-to-contribute)
 - [📄 License](#-license)
 - [👤 Author](#-author)
 
@@ -22,15 +26,13 @@
 
 ## 📖 Introduction
 
-`@harshalkatakiya/prettier-config` is a sharable Prettier configuration designed to simplify consistent code formatting across projects. It provides:
+`@harshalkatakiya/prettier-config` is a **shareable Prettier configuration** designed to provide consistent code formatting across projects.
 
-- **Opinionated rules** for clean, readable, and maintainable code.
-- **Built-in Tailwind CSS support** via `prettier-plugin-tailwindcss`.
-- A **CLI tool** that automatically:
-  - Installs necessary dependencies.
-  - Creates a configuration file tailored to your project’s language (JavaScript or TypeScript).
-  - Generates a `.prettierignore` file with common ignore patterns.
-  - Updates your `package.json` with useful Prettier scripts.
+✅ **Opinionated rules** for clean, readable, and maintainable code.  
+🌀 **Built-in Tailwind CSS support** via `prettier-plugin-tailwindcss`.  
+⚡ **Easy CLI setup** – installs dependencies, creates configs, and updates `package.json`.  
+🔄 **Auto-detects TypeScript & JavaScript projects** and generates the right config file.  
+📜 **Prettier scripts** for easy formatting and validation.
 
 Whether you’re starting a new project or integrating Prettier into an existing one, this package streamlines your setup process.
 
@@ -38,19 +40,18 @@ Whether you’re starting a new project or integrating Prettier into an existing
 
 ## 🌟 Features
 
-- ✅ **Pre-configured Prettier Rules**: Consistent code style with a robust base configuration.
-- 🌀 **Tailwind CSS Support**: Comes with `prettier-plugin-tailwindcss` for better Tailwind class formatting.
-- ⚡ **Automatic CLI Setup**: One command installs dependencies, creates config files, and updates your project.
-- 🔄 **TypeScript & JavaScript Compatibility**: Detects your project type and generates a `prettier.config.ts` for TypeScript projects or a `prettier.config.js` for JavaScript projects.
-- 🔧 **Customizable**: Extend or override the default configuration as needed.
-- 🛠️ **Modern Config**: Compatible with the latest Prettier features and syntax.
-- 🚀 **Ready-to-Use Scripts**: Adds formatting and validation scripts to your `package.json`.
+✔ **Pre-configured Prettier Rules** – Opinionated defaults for better readability.  
+🎨 **Tailwind CSS Support** – Formats Tailwind classes with `prettier-plugin-tailwindcss`.  
+⚡ **Automatic Setup** – One command sets up everything in seconds.  
+📂 **Project Type Detection** – Generates `prettier.config.ts` (TypeScript) or `prettier.config.js` (JavaScript).  
+🛠 **Customizable** – Extend or override the base configuration.  
+🚀 **Modern & Up-to-Date** – Works with the latest Prettier and Tailwind CSS versions.
 
 ---
 
-## 🚀 Usage
+## 🚀 Installation & Usage
 
-### 1️⃣ Automatic CLI Setup
+### ⚡ Automatic CLI Setup
 
 The simplest way to set up Prettier with this configuration is to use the CLI command. Run the following in your project root:
 
@@ -58,135 +59,89 @@ The simplest way to set up Prettier with this configuration is to use the CLI co
 npx @harshalkatakiya/prettier-config add
 ```
 
-This command will:
+✅ **Prompts for Tailwind CSS support** and applies the appropriate configuration.  
+🔄 **Installs dependencies** (`prettier`, `@harshalkatakiya/prettier-config`, and `prettier-plugin-tailwindcss` if needed).  
+📂 **Generates configuration files** (`prettier.config.js` or `.ts` and `.prettierignore`).  
+📜 **Updates `package.json` scripts** to include `prettier` commands.
 
-- **Prompt for Tailwind CSS support:**  
-  You’ll be asked whether to configure Prettier for Tailwind CSS (default is _yes_).  
-  - If enabled, it detects your Tailwind setup and applies one of two configurations:
-    - **Tailwind CSS v3:** If a `tailwind.config.js` (or `.ts` for TypeScript projects) exists.
-    - **Tailwind CSS v4:** If no Tailwind config file is found (defaulting to a setup that uses your main stylesheet).
-- **Install Dependencies:**  
-  Installs `prettier`, `@harshalkatakiya/prettier-config`, and if Tailwind is enabled, also installs `prettier-plugin-tailwindcss`.
-- **Generate Configuration Files:**  
-  - Creates a `prettier.config.js` or `prettier.config.ts` (depending on your project) that extends the base configuration.
-  - Generates a `.prettierignore` file containing common patterns (`node_modules`, `dist`, `build`).
-- **Update `package.json`:**  
-  Adds the following scripts:
-  - `prettier:check` – to verify that your code adheres to the formatting rules.
-  - `prettier` – to automatically format your code.
+> **After setup:**  
+> Check your generated `prettier.config.js` or `prettier.config.ts`. Update paths if needed.
 
-After setup, review the generated `prettier.config.js` or `prettier.config.ts` file. If you enabled Tailwind CSS support, you might need to update the file path for your Tailwind configuration (v3) or your main Tailwind stylesheet (Main CSS File) (v4) as indicated in the comments.
+### 🔧 Manual Setup
 
-### 2️⃣ Manual Setup (Optional)
+If you prefer manual installation, follow these steps:
 
-If you prefer to set up Prettier manually, follow these steps:
+#### 1️⃣ Install Dependencies
 
-1. **Install Dependencies:**
+```bash
+npm install --save-dev prettier @harshalkatakiya/prettier-config prettier-plugin-tailwindcss
+```
 
-   ```bash
-   npm install --save-dev prettier @harshalkatakiya/prettier-config prettier-plugin-tailwindcss
-   ```
+#### 2️⃣ Create Configuration File
 
-2. **Create the Configuration File:**
+- **Without Tailwind CSS:**
 
-   Create a file named `prettier.config.js` (or `prettier.config.ts` for TypeScript projects) in your project root with the following content:
+  ```js
+  import baseConfig from '@harshalkatakiya/prettier-config';
 
-   - `prettier.config.js` (Without Tailwind CSS):
-  
-      ```js
-      /**
-      * @see https://prettier.io/docs/en/configuration.html
-      * @type {import("prettier").Config}
-      */
-      import baseConfig from '@harshalkatakiya/prettier-config';
+  export default { ...baseConfig };
+  ```
 
-      const config = {
-        ...baseConfig
-      };
+- **With Tailwind CSS (v3)**:
 
-      export default config;
-      ```
+  ```js
+  import baseConfig from '@harshalkatakiya/prettier-config';
 
-   - `prettier.config.js` (Tailwind CSS `v3`):
+  export default {
+    ...baseConfig,
+    plugins: ['prettier-plugin-tailwindcss'],
+    tailwindConfig: './tailwind.config.js',
+    tailwindFunctions: ['cn']
+  };
+  ```
 
-      ```js
-      /**
-      * @see https://prettier.io/docs/en/configuration.html
-      * @type {import("prettier").Config}
-      */
-      import baseConfig from '@harshalkatakiya/prettier-config';
+- **With Tailwind CSS (v4)**:
 
-      const config = {
-        ...baseConfig,
-        plugins: ['prettier-plugin-tailwindcss'],
-        tailwindConfig: './tailwind.config.js',
-        tailwindFunctions: ['cn']
-      };
+  ```js
+  import baseConfig from '@harshalkatakiya/prettier-config';
 
-      export default config;
-      ```
+  export default {
+    ...baseConfig,
+    plugins: ['prettier-plugin-tailwindcss'],
+    tailwindStylesheet: './src/app/globals.css', // update this path yo your main CSS file
+    tailwindFunctions: ['cn']
+  };
+  ```
 
-   - `prettier.config.js` (Tailwind CSS `v4`):
-  
-      ```js
-      /**
-      * @see https://prettier.io/docs/en/configuration.html
-      * @type {import("prettier").Config}
-      */
-      import baseConfig from '@harshalkatakiya/prettier-config';
+#### 3️⃣ Create a `.prettierignore` File
 
-      const config = {
-        ...baseConfig,
-        plugins: ['prettier-plugin-tailwindcss'],
-        tailwindStylesheet: "./src/app/globals.css", // update this path according to your main CSS file
-        tailwindFunctions: ['cn']
-      };
+```text
+node_modules
+dist
+build
+```
 
-      export default config;
-      ```
+#### 4️⃣ Update `package.json` Scripts
 
-3. **Create a Prettier Ignore File:**
-
-   Create a `.prettierignore` file in your project root with the following content:
-
-   ```text
-   node_modules
-   dist
-   build
-   ```
-
-4. **Update `package.json` Scripts:**
-
-   Add the following scripts to the `"scripts"` section of your `package.json`:
-
-   ```json
-   {
-     "scripts": {
-       "prettier:check": "prettier -c .",
-       "prettier": "prettier -w -u ."
-     }
-   }
-   ```
+```json
+{
+  "scripts": {
+    "prettier:check": "prettier -c .",
+    "prettier": "prettier -w -u ."
+  }
+}
+```
 
 ---
 
 ## 📜 Scripts
 
-When using the CLI setup, the following scripts are automatically added to your `package.json`:
+The following scripts are added to your `package.json`:
 
-- **Format Your Code:**
-
-  ```bash
-  npm run prettier
-  ```
-
-- **Check for Unformatted Code:**
-
-  ```bash
-  npm run prettier:check
-  ```
-
-These scripts help you quickly validate and apply Prettier formatting across your project.
+| Command                  | Description                       |
+| ------------------------ | --------------------------------- |
+| `npm run prettier`       | Formats all files in the project. |
+| `npm run prettier:check` | Checks for unformatted code.      |
 
 ---
 
@@ -194,65 +149,69 @@ These scripts help you quickly validate and apply Prettier formatting across you
 
 This package comes with the following Prettier rules pre-configured:
 
-| Option                       | Value         | Description                                                 |
-| ---------------------------- | ------------- | ----------------------------------------------------------- |
-| `experimentalTernaries`      | `true`        | Enables experimental ternary formatting.                  |
-| `printWidth`                 | `80`          | The maximum line width.                                     |
-| `tabWidth`                   | `2`           | Number of spaces per indentation level.                     |
-| `useTabs`                    | `false`       | Use spaces for indentation.                                 |
-| `semi`                       | `true`        | Add semicolons at the end of statements.                    |
-| `singleQuote`                | `true`        | Use single quotes instead of double quotes.                 |
-| `quoteProps`                 | `as-needed`   | Quote object properties only when required.               |
-| `jsxSingleQuote`             | `true`        | Use single quotes in JSX.                                   |
-| `trailingComma`              | `none`        | Do not add trailing commas.                                 |
-| `bracketSpacing`             | `true`        | Add spaces between brackets in object literals.             |
-| `bracketSameLine`            | `true`        | Keep the closing bracket of a JSX element on the same line. |
-| `arrowParens`                | `always`      | Always include parentheses in arrow functions.              |
-| `singleAttributePerLine`     | `false`       | Allow multiple attributes on a single line.                 |
-| `embeddedLanguageFormatting` | `auto`        | Automatically format embedded languages.                    |
+| Option                       | Value       | Description                                                 |
+| ---------------------------- | ----------- | ----------------------------------------------------------- |
+| `experimentalTernaries`      | `true`      | Enables experimental ternary formatting.                    |
+| `printWidth`                 | `80`        | The maximum line width.                                     |
+| `tabWidth`                   | `2`         | Number of spaces per indentation level.                     |
+| `useTabs`                    | `false`     | Use spaces for indentation.                                 |
+| `semi`                       | `true`      | Add semicolons at the end of statements.                    |
+| `singleQuote`                | `true`      | Use single quotes instead of double quotes.                 |
+| `quoteProps`                 | `as-needed` | Quote object properties only when required.                 |
+| `jsxSingleQuote`             | `true`      | Use single quotes in JSX.                                   |
+| `trailingComma`              | `none`      | Do not add trailing commas.                                 |
+| `bracketSpacing`             | `true`      | Add spaces between brackets in object literals.             |
+| `bracketSameLine`            | `true`      | Keep the closing bracket of a JSX element on the same line. |
+| `arrowParens`                | `always`    | Always include parentheses in arrow functions.              |
+| `singleAttributePerLine`     | `false`     | Allow multiple attributes on a single line.                 |
+| `embeddedLanguageFormatting` | `auto`      | Automatically format embedded languages.                    |
 
-Additionally, if Tailwind CSS support is enabled, extra options are injected:
+**Tailwind-specific settings (if enabled):**
 
-- **For Tailwind CSS v3:**
-  - `plugins: ["prettier-plugin-tailwindcss"]`
-  - `tailwindConfig: "./tailwind.config.js"`
-  - `tailwindFunctions: ["cn"]`
+- **Tailwind CSS v3:**
 
-- **For Tailwind CSS v4:**
-  - `plugins: ["prettier-plugin-tailwindcss"]`
-  - `tailwindStylesheet: "./src/app/globals.css"` (update this path according to your main CSS file)
-  - `tailwindFunctions: ["cn"]`
+  ```js
+  plugins: ["prettier-plugin-tailwindcss"],
+  tailwindConfig: "./tailwind.config.js",
+  tailwindFunctions: ["cn"]
+  ```
 
-**Note:** The CLI tool automatically detects your project type (TypeScript or JavaScript) and whether a Tailwind configuration file exists, then applies the corresponding setup.
+- **Tailwind CSS v4:**
+
+  ```js
+  plugins: ["prettier-plugin-tailwindcss"],
+  tailwindStylesheet: "./src/app/globals.css", // update this path yo your main CSS file
+  tailwindFunctions: ["cn"]
+  ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you find bugs or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/Harshalkatakiya/prettier-config/issues).
+💡 **Want to contribute?** Open an issue or submit a PR on the [GitHub repository](https://github.com/Harshalkatakiya/prettier-config/issues).
 
 ### How to Contribute
 
-1. Fork this repository.
-2. Create a new branch for your feature or bug fix.
-3. Commit your changes with a clear message.
-4. Open a pull request and detail your changes.
+1️⃣ **Fork** the repository.  
+2️⃣ **Create a new branch** for your feature or fix.  
+3️⃣ **Commit your changes** with a descriptive message.  
+4️⃣ **Open a pull request** and describe your changes.
 
 ---
 
 ## 📄 License
 
-This package is licensed under the [MIT License](LICENSE).
+This package is licensed under the **[MIT License](LICENSE)**.
 
 ---
 
 ## 👤 Author
 
-### Harshal Katakiya
+### **Harshal Katakiya**
 
-- GitHub: [@Harshalkatakiya](https://github.com/Harshalkatakiya)
-- Email: [katakiyaharshl001@gmail.com](mailto:katakiyaharshl001@gmail.com)
-- NPM: [@harshalkatakiya](https://www.npmjs.com/~harshalkatakiya)
+- **GitHub:** [@Harshalkatakiya](https://github.com/Harshalkatakiya)
+- **Email:** [katakiyaharshl001@gmail.com](mailto:katakiyaharshl001@gmail.com)
+- **NPM:** [@harshalkatakiya](https://www.npmjs.com/~harshalkatakiya)
 
 ---
 
