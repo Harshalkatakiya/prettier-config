@@ -54,37 +54,59 @@ const installDependencies = async (
   }
 };
 
-const createPrettierConfigFile = (isTailwindEnabled: boolean): PrettierConfigFileResult => {
+const createPrettierConfigFile = async (
+  isTailwindEnabled: boolean
+): Promise<PrettierConfigFileResult> => {
   const langKey: TailwindConfigFileExtension = isTypeScriptProject(projectPath) ? 'ts' : 'js';
   const configFilePath = path.join(projectPath, `prettier.config.${langKey}`);
   const tailwindCssVersion = detectTailwindVersion(projectPath);
-  if (!existsSync(configFilePath)) {
-    const configContent =
-      prettierConfigContents[langKey][
-      isTailwindEnabled ?
-        tailwindCssVersion === 3 ?
-          'v3'
-          : 'v4'
-        : 'base'
-      ];
-    writeFileSync(configFilePath, configContent, 'utf-8');
-    console.log(`Created ${configFilePath}`);
-  } else {
-    console.log(`${configFilePath} already exists. Skipping creation.`);
+  const configContent =
+    prettierConfigContents[langKey][
+    isTailwindEnabled ? (tailwindCssVersion === 3 ? 'v3' : 'v4') : 'base'
+    ];
+  const existingConfig = existsSync(configFilePath)
+    ? readFileSync(configFilePath, 'utf-8')
+    : '';
+  if (existingConfig !== configContent) {
+    const { replace } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'replace',
+        message: `${configFilePath} already exists. Do you want to replace it?`,
+        default: false
+      }
+    ]);
+    if (replace) {
+      writeFileSync(configFilePath, configContent, 'utf-8');
+      console.log(chalk.green(`Replaced ${configFilePath}`));
+    }
   }
   return { tailwindCssVersion, langKey };
 };
 
-const createPrettierIgnoreFile = (): void => {
+const createPrettierIgnoreFile = async (): Promise<void> => {
   const prettierIgnorePath = resolve(projectPath, '.prettierignore');
-  if (!existsSync(prettierIgnorePath)) {
+  if (existsSync(prettierIgnorePath)) {
+    const { replace } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'replace',
+        message: `${prettierIgnorePath} already exists. Do you want to replace it?`,
+        default: false
+      }
+    ]);
+    if (replace) {
+      writeFileSync(prettierIgnorePath, prettierIgnoreData.join('\n'));
+      console.log(
+        chalk.green('\n✅ Replaced .prettierignore with common patterns')
+      );
+    } else {
+      console.log(chalk.yellow('\n⚠️  Skipped replacing .prettierignore'));
+    }
+  } else {
     writeFileSync(prettierIgnorePath, prettierIgnoreData.join('\n'));
     console.log(
       chalk.green('\n✅ Created .prettierignore with common patterns')
-    );
-  } else {
-    console.log(
-      chalk.yellow('\n⚠️  .prettierignore already exists. Skipping creation.')
     );
   }
 };
@@ -130,8 +152,8 @@ const main = async (): Promise<void> => {
   await installDependencies(
     isTailwindEnabled ? ['prettier-plugin-tailwindcss'] : []
   );
-  const { tailwindCssVersion, langKey } = createPrettierConfigFile(isTailwindEnabled);
-  createPrettierIgnoreFile();
+  const { tailwindCssVersion, langKey } = await createPrettierConfigFile(isTailwindEnabled);
+  await createPrettierIgnoreFile();
   addScriptsToPackageJson();
   console.log(chalk.green('\n🎉 Prettier setup complete!'));
   console.log(chalk.cyan('───────────────────────────────────────────'));
