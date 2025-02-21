@@ -1,93 +1,58 @@
-export interface PrettierConfigContentVersions {
-  base: string;
-  v3: string;
-  v4: string;
-}
+export type TailwindConfigFileExtension = 'ts' | 'js';
+export type ConfigKey = 'base' | 'v3' | 'v4';
 
-export interface PrettierConfigContent {
-  js: PrettierConfigContentVersions;
-  ts: PrettierConfigContentVersions;
-}
+export type PrettierConfigContent = Record<
+  TailwindConfigFileExtension,
+  Record<ConfigKey, string>
+>;
 
-const prettierConfigContents: PrettierConfigContent = {
-  js: {
-    base: `import baseConfig from "@harshalkatakiya/prettier-config";
+const createConfigContent = (
+  type: 'js' | 'ts',
+  version: ConfigKey,
+  extraContent: string
+) => {
+  const typeImports =
+    type === 'ts'
+      ? "import type { Config } from 'prettier';\n"
+      : "/**\n * @see https://prettier.io/docs/en/configuration.html\n * @type {import(\"prettier\").Config}\n */\n";
 
-/**
- * @see https://prettier.io/docs/en/configuration.html
- * @type {import("prettier").Config}
- */
-const config = {
-  ...baseConfig
+  return `${typeImports}import baseConfig from "@harshalkatakiya/prettier-config";
+
+${type === 'ts' ? 'const config: Config = {' : 'const config = {'}
+  ...baseConfig${extraContent ? ',\n  ' + extraContent : ''}
 };
 
 export default config;
-`,
-    v3: `import baseConfig from "@harshalkatakiya/prettier-config";
+`;
+};
 
-        /**
-         * @see https://prettier.io/docs/en/configuration.html
-         * @type {import("prettier").Config}
-         */
-        const config = {
-            ...baseConfig,
-            plugins: ["prettier-plugin-tailwindcss"],
-            tailwindConfig: "./tailwind.config.js",
-            tailwindFunctions: ["cn"]
-        };
-
-        export default config;
-`,
-    v4: `import baseConfig from "@harshalkatakiya/prettier-config";
-
-    /**
-     * @see https://prettier.io/docs/en/configuration.html
-     * @type {import("prettier").Config}
-     */
-    const config = {
-        ...baseConfig,
-        plugins: ["prettier-plugin-tailwindcss"],
-        tailwindStylesheet: "./src/app/globals.css",
-        tailwindFunctions: ["cn"]
-    };
-
-    export default config;
-`
+const prettierConfigContents = {
+  js: {
+    base: createConfigContent('js', 'base', ''),
+    v3: createConfigContent(
+      'js',
+      'v3',
+      'plugins: ["prettier-plugin-tailwindcss"],\n  tailwindConfig: "./tailwind.config.js",\n  tailwindFunctions: ["cn"]'
+    ),
+    v4: createConfigContent(
+      'js',
+      'v4',
+      'plugins: ["prettier-plugin-tailwindcss"],\n  tailwindStylesheet: "./src/app/globals.css",\n  tailwindFunctions: ["cn"]'
+    )
   },
   ts: {
-    base: `import type { Config } from 'prettier';
-    import baseConfig from "@harshalkatakiya/prettier-config";
-    
-    const config: Config = {
-        ...baseConfig
-    };
-    
-    export default config;
-    `,
-    v3: `import type { Config } from 'prettier';
-    import baseConfig from "@harshalkatakiya/prettier-config";
-    
-    const config: Config = {
-        ...baseConfig,
-        plugins: ["prettier-plugin-tailwindcss"],
-            tailwindConfig: "./tailwind.config.js",
-            tailwindFunctions: ["cn"]
-    };
-    
-    export default config;
-    `,
-    v4: `import type { Config } from 'prettier';
-    import baseConfig from "@harshalkatakiya/prettier-config";
-    
-    const config: Config = {
-        ...baseConfig,
-        plugins: ["prettier-plugin-tailwindcss"],
-        tailwindStylesheet: "./src/app/globals.css",
-        tailwindFunctions: ["cn"]
-    };
-    
-    export default config;
-    `
+    base: createConfigContent('ts', 'base', ''),
+    v3: createConfigContent(
+      'ts',
+      'v3',
+      'plugins: ["prettier-plugin-tailwindcss"],\n  tailwindConfig: "./tailwind.config.js",\n  tailwindFunctions: ["cn"]'
+    ),
+    v4: createConfigContent(
+      'ts',
+      'v4',
+      'plugins: ["prettier-plugin-tailwindcss"],\n  tailwindStylesheet: "./src/app/globals.css",\n  tailwindFunctions: ["cn"]'
+    )
   }
-};
+} satisfies PrettierConfigContent;
+
 export default prettierConfigContents;

@@ -10,6 +10,14 @@ import installDependenciesCommand from './utils/installDependenciesCommand.js';
 import isTypeScriptProject from './utils/isTypescriptProject.js';
 import prettierConfigContents from './utils/prettierConfigContent.js';
 
+export type TailwindConfigFileExtension = 'ts' | 'js';
+export type ConfigKey = 'base' | 'v3' | 'v4';
+
+interface PrettierConfigFileResult {
+  tailwindCssVersion: number;
+  langKey: TailwindConfigFileExtension;
+}
+
 const projectPath = process.cwd();
 
 const prettierIgnoreData: string[] = ['node_modules', 'dist', 'build'];
@@ -46,30 +54,25 @@ const installDependencies = async (
   }
 };
 
-const createPrettierConfigFile = (isTailwindEnabled: boolean): void => {
-  const langKey = isTypeScriptProject(projectPath) ? 'ts' : 'js';
+const createPrettierConfigFile = (isTailwindEnabled: boolean): PrettierConfigFileResult => {
+  const langKey: TailwindConfigFileExtension = isTypeScriptProject(projectPath) ? 'ts' : 'js';
   const configFilePath = path.join(projectPath, `prettier.config.${langKey}`);
+  const tailwindCssVersion = detectTailwindVersion(projectPath);
   if (!existsSync(configFilePath)) {
     const configContent =
       prettierConfigContents[langKey][
-        isTailwindEnabled ?
-          detectTailwindVersion(projectPath) === 3 ?
-            'v3'
+      isTailwindEnabled ?
+        tailwindCssVersion === 3 ?
+          'v3'
           : 'v4'
         : 'base'
       ];
     writeFileSync(configFilePath, configContent, 'utf-8');
     console.log(`Created ${configFilePath}`);
-    if (isTailwindEnabled) {
-      console.log(
-        chalk.yellow(
-          `📢 Update ${detectTailwindVersion(projectPath) === 3 ? 'TailwindCss Config FIle Path' : 'TailwindCSS main CSS File Path'} in prettier.config.${langKey}.`
-        )
-      );
-    }
   } else {
     console.log(`${configFilePath} already exists. Skipping creation.`);
   }
+  return { tailwindCssVersion, langKey };
 };
 
 const createPrettierIgnoreFile = (): void => {
@@ -127,12 +130,19 @@ const main = async (): Promise<void> => {
   await installDependencies(
     isTailwindEnabled ? ['prettier-plugin-tailwindcss'] : []
   );
-  createPrettierConfigFile(isTailwindEnabled);
+  const { tailwindCssVersion, langKey } = createPrettierConfigFile(isTailwindEnabled);
   createPrettierIgnoreFile();
   addScriptsToPackageJson();
   console.log(chalk.green('\n🎉 Prettier setup complete!'));
   console.log(chalk.cyan('───────────────────────────────────────────'));
   console.log('Next steps:');
+  if (isTailwindEnabled) {
+    console.log(
+      chalk.yellow(
+        `📢 Update ${tailwindCssVersion === 3 ? 'TailwindCss Config FIle Path' : 'TailwindCSS main CSS File Path'} in prettier.config.${langKey}.`
+      )
+    );
+  }
   console.log(
     `- Run ${chalk.cyan('npm run prettier:check')} to verify formatting`
   );
