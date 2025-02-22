@@ -30,8 +30,7 @@
 
 ✅ **Opinionated rules** for clean, readable, and maintainable code.  
 🌀 **Built-in Tailwind CSS support** via `prettier-plugin-tailwindcss`.  
-⚡ **Easy CLI setup** – installs dependencies, creates configs, and updates `package.json`.  
-🔄 **Auto-detects TypeScript & JavaScript projects** and generates the right config file.  
+⚡ **Easy CLI setup** – installs dependencies, creates configs, and updates `package.json`. 
 📜 **Prettier scripts** for easy formatting and validation.
 
 Whether you’re starting a new project or integrating Prettier into an existing one, this package streamlines your setup process.
@@ -61,11 +60,11 @@ npx @harshalkatakiya/prettier-config add
 
 ✅ **Prompts for Tailwind CSS support** and applies the appropriate configuration.  
 🔄 **Installs dependencies** (`prettier`, `@harshalkatakiya/prettier-config`, and `prettier-plugin-tailwindcss` if needed).  
-📂 **Generates configuration files** (`prettier.config.js` or `.ts` and `.prettierignore`).  
+📂 **Generates configuration files** (`prettier.config.js` and `.prettierignore`).  
 📜 **Updates `package.json` scripts** to include `prettier` commands.
 
 > **After setup:**  
-> Check your generated `prettier.config.js` or `prettier.config.ts`. Update paths if needed.
+> Check your generated `prettier.config.js`. Update paths if needed.
 
 ### 🔧 Manual Setup
 
